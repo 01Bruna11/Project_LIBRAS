@@ -1,28 +1,29 @@
-# Projeto de Reconhecimento de Letras em LIBRAS — Versão 0
+  # Projeto de Reconhecimento de Letras em LIBRAS — Versão 0
 
-Este projeto é a **primeira versão funcional (v0)** de um sistema de reconhecimento de **letras do alfabeto em LIBRAS**, utilizando **MediaPipe**, **TensorFlow/Keras** e **Python 3.9**.  
-O objetivo desta versão é construir um pipeline básico que:
+  Este projeto é a **primeira versão funcional (v0)** de um sistema de reconhecimento de **letras do alfabeto em LIBRAS**, utilizando **MediaPipe**, **TensorFlow/Keras** e **Python 3.9**.  
+  O objetivo desta versão é construir um pipeline básico que:
 
-- captura landmarks das mãos em tempo real  
-- organiza um dataset próprio (A–J)  
-- treina um modelo simples de classificação  
-- realiza predições em tempo real pela webcam  
+  - captura landmarks das mãos em tempo real  
+  - organiza um dataset próprio (A–J)  
+  - treina um modelo simples de classificação  
+  - realiza predições em tempo real pela webcam  
 
-Essa é uma **versão de estudo**, servindo como base para evoluções futuras — como reconhecer movimentos (H, J), melhorar arquitetura do modelo, aumentar o dataset e avançar para frases ou palavras.
+  Essa é uma **versão de estudo**, servindo como base para evoluções futuras — como reconhecer movimentos (H, J), melhorar arquitetura do modelo, aumentar o dataset e avançar para frases ou palavras.
 
----
+  ---
 
----
+  ## Requisitos
 
-## Requisitos
+  - Python **3.9.x**  
+  - Ambiente virtual configurado  
+  - Webcam funcionando  
+  - Dependências instaladas:
 
-- Python **3.9.x**  
-- Ambiente virtual configurado  
-- Webcam funcionando  
-- Dependências instaladas:
+```
 
 pip install -r requirements.txt
 
+```
 
 Bibliotecas principais:
 
@@ -42,8 +43,11 @@ O dataset é criado coletando 63 pontos (21 landmarks × xyz) da mão em poses e
 
 Para coletar:
 
+```
+
 python src/build_dataset.py
 
+```
 
 Este script:
 
@@ -52,8 +56,11 @@ Este script:
 - salva cada captura como `.npy` dentro da pasta da letra  
 - no final, gera:
 
+```
+
 data/dataset_final.npz
 
+```
 
 com:
 
@@ -67,13 +74,19 @@ com:
 
 Depois do dataset estar pronto, rode:
 
+```
+
 python src/train_model.py
 
+```
 
 O modelo gera:
 
+```
+
 models/model_libras.h5
 
+```
 
 Durante o treino, são exibidos:
 
@@ -88,8 +101,11 @@ Durante o treino, são exibidos:
 
 Para executar o reconhecimento via webcam:
 
+```
+
 python src/test_model.py
 
+```
 
 A janela exibe:
 
@@ -97,6 +113,44 @@ A janela exibe:
 - a letra prevista (`Pred: A`, por exemplo)
 
 Pressione **Q** para sair.
+
+---
+
+## 4. Avaliação do Modelo (Métricas)
+
+Após treinar o modelo, você pode avaliar a performance real dele com:
+
+```
+
+python src/evaluate_model.py
+
+```
+
+Esse script calcula:
+
+- **Acurácia geral**
+- **Precision, Recall e F1-score por classe**
+- **Matriz de confusão (visual)**
+
+Os resultados são salvos automaticamente em:
+
+```
+
+metrics/
+
+```
+
+Arquivos gerados:
+
+- `confusion_matrix.png` — imagem da matriz de confusão  
+- `report.txt` — relatório completo com todas as métricas  
+
+Essa avaliação permite identificar:
+
+- classes que o modelo acerta mais  
+- letras que estão sendo confundidas  
+- onde é necessário aumentar o dataset  
+- se o modelo sofre com sobreajuste  
 
 ---
 
@@ -144,5 +198,5 @@ Projeto criado como parte de um estudo pessoal sobre **aprendizado de máquina**
 ---
 
 ## ⭐ Se este projeto te ajudou, considere marcá-lo com uma estrela!
-
+```
 

@@ -5,9 +5,6 @@ __pycache__/
 # Virtual env
 venv/
 
-# Modelos pesados
-models/*.h5
-
 # Dados
 data/*.npz
 data/*.*
